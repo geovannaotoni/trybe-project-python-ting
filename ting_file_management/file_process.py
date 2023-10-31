@@ -1,5 +1,6 @@
 from ting_file_management.queue import Queue
 from ting_file_management.file_management import txt_importer
+import sys
 
 
 def process(path_file, instance: Queue):
@@ -27,5 +28,9 @@ def remove(instance: Queue):
     print(f"Arquivo {removed['nome_do_arquivo']} removido com sucesso")
 
 
-def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
+def file_metadata(instance: Queue, position):
+    try:
+        queue_data = instance.search(position)
+        print(queue_data)
+    except IndexError:
+        return print("Posição inválida", file=sys.stderr)
